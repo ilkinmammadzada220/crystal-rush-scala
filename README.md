@@ -4,10 +4,34 @@
 ## Strategy
 This part is only about poor strategy, not classes, methods and other stuffs.
 
-Before starts, we check the certain robot is dead or not.
+Before starts, we check the certain robot is dead or not.If is dead, then we 
+run WAIT (none()) action.
 ```
-if(!robot.isAlive())  //First check if robot is alive
+if(!robot.isAlive())
       {
-        robot.none()        //If it is, then WAIT
+        robot.none()
       }
 ```
+
+As we read from rules, robots have to deliver ore which it has. Ore is item. There is no
+only item type. So, we have to check does robot has item and it is ore(CRYSTAL) or not.
+If it is CRYSTAL, then robot must deliver it to headquarter.
+```
+if(!robot.getItem().equals("NOTHING")){
+          if(robot.getItem().equals("CRYSTAL")) {
+            robot.move(headquarter)
+          }
+```
+
+In empty situation robot can dig some cells. There is a hashmap, which take robot id and position(Point).
+It provides to know that robot has arrived to certain position or not. If it has arrived, it can dig proper cell.
+```
+if(board.robotCell.contains(robot.getId()) == false)
+          {
+            board.robotCell += (robot.getId() -> new Point(posX,posY))
+          }
+          var digPos = new Point(board.robotCell.get(robot.getId()).get.x,board.robotCell.get(robot.getId()).get.y)
+          robot.dig(digPos)
+        }
+```
+
